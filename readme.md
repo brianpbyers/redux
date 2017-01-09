@@ -1,5 +1,5 @@
 <!--
-Creator: <Name>
+Creator: Ilias Tsangaris
 Market: SF
 -->
 
@@ -11,30 +11,30 @@ Market: SF
 <!-- framing the "why" in big-picture/real world examples -->
 *This workshop is important because:*
 
-Maintaining track of an application's state is hard. Redux's patterns help our data stay in sync when our users take asychronous actions.
+Keeping track of an application's state is hard. Redux's patterns help our data stay in sync when our users take asynchronous actions.
 
 ### What are the objectives?
 <!-- specific/measurable goal for students to achieve -->
 *After this workshop, developers will be able to:*
 
-* Illustrate Redux's data-flow
-* Keep track of your application's state with a **store** 
-* Define and emit **actions** to update your state
-* Calculate diffs to your state with **reducers**
-* Integrate Redux into a React component
+* **Illustrate** Redux's data-flow
+* **Keep track** of your application's state with a *store* 
+* **Define** and **emit** *actions* to update your state
+* **Calculate** diffs to your state with *reducers*
+* **Integrate** Redux into a React component
 
 ### Where should we be now?
 <!-- call out the skills that are prerequisites -->
 *Before this workshop, developers should already be able to:*
 
-* Write JavaScript
-* Build a simple application with React
+* **Write** JavaScript
+* **Build** a simple application with React
 
-##Philosophy
+## Philosophy
 
-[Redux](https://github.com/reactjs/redux)'s main purpose is to **manage the state of an application**. It's patterns are expressly inspired by [Flux](https://github.com/facebook/flux), Facebook recommended way to manage state amongst React components and [Elm](https://github.com/elm-lang), a functional programming language.
+[Redux](https://github.com/reactjs/redux)'s main purpose is to **manage the state of an application**. Its patterns are expressly inspired by [Flux](https://github.com/facebook/flux), Facebook's recommended way to manage state among React components and [Elm](https://github.com/elm-lang), a functional programming language.
 
-###Three Principles
+### Three Principles
 
 Redux has three very important design choices:
 
@@ -42,17 +42,17 @@ Redux has three very important design choices:
 * **State is read-only**: The *only* way to mutate your application's state is to emit an action and create a *new* state object. All actions are dispatched to a centralized location, which helps make your state easier to keep track of.
 * **Changes are made with pure functions**: Changes to your state are determined by reducers, which are pure functions that take in the previous state and an action. Using this information, it determines the updated state. Your application may start with a single reducer, but as the application grows, different reducers can manage different parts of the application's state.
 
-###Redux Architecture
+### Redux Architecture
 
 ![redux-architecture](https://camo.githubusercontent.com/83fef7601c50c8b025953579e5c5be3aa47ee51d/687474703a2f2f692e696d6775722e636f6d2f30756e68744e512e6a7067)
 
-##Redux Like Button
+## Redux Like Button
 
-Let's take a look at implementing a simple like button to see how actions, reducers, and a store may work together to maintain its state.
+Let's take a look at implementing a simple `like` button to see how actions, reducers, and a store may work together to maintain state.
 
-In `starter-code` run `npm install` to install all the dependancies and get your gulp task running. In a separate tab run `npm start` to get your server started on port 3000.
+In `starter-code` run `npm install` to install all the dependencies and get your gulp task running. In a separate tab run `npm start` to get your server started on port 3000.
 
-First let's create a like button in our `index.html` in addition to a place where we can see the total likes. Giving them both `id`'s will help us reference them later.
+First, let's create a like button in our `index.html` in addition to a place where we can see the total likes. Giving them both `id`s will help us reference them later.
 
 ```html
 <h3 id="total-likes"></h3>
@@ -79,9 +79,9 @@ const likes = (state = 0, action) => {
 }
 ```
 
-The above store's state defaults to 0. If it is passed an action of type "LIKE", then it increments it's state by 1. Otherwise it does nothing.
+The above store's state defaults to 0. If it is passed an action of type "LIKE", then it increments its state by 1. Otherwise it does nothing.
 
-Now using this reducer, we can create a store for our application. At the top of our file let's import Redux.
+Now, using this reducer, we can create a store for our application. At the top of our file, let's import Redux.
 
 ```js
 import { createStore } from 'redux'
@@ -89,9 +89,9 @@ import { createStore } from 'redux'
 
 What is this syntax? It's how we [import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) a specific member (distinct piece) of the Redux module (library).
 
->Note: `import Redux from 'redux'` doesn't work because Redux doesn't `export` anything by `default`, as a result it just has modular members you can import from the Redux module. If you do want to import everything it can be done with the syntax, `import * as Redux from 'redux'`. Then you could access its `createStore` member with `Redux.createStore`. However we're going to prefer the above syntax.
+>Note: If you do want to import everything that can be done with the syntax, `import * as Redux from 'redux'`. Then you could access its `createStore` member with `Redux.createStore`. However, we're going to prefer the above syntax.
 
-Using Redux's `createStore` method, let's now create a store for our application. This store will contain the applications state and know how to update it appropriately because we will give it our reducer.
+Now let's use Redux's `createStore` method to create a store for our application. This store will contain the applications state and know how to update it appropriately because we will give it our reducer.
 
 ```js
 // create a store, where the state lives
@@ -107,7 +107,7 @@ const renderView = () => {
 }
 ```
 
-Everytime this function is run it will update our view to display the latest of our state.
+Everytime this function is run it will update our view to display the latest state.
 
 How many times is `renderView` being called at the moment? None. Let's call it once so that on page load the initial state is shown as being `0`, which our reducer has defined for us in the line: `const likes = (state = 0, action) => {...}`.
 
@@ -116,7 +116,7 @@ How many times is `renderView` being called at the moment? None. Let's call it o
 renderView()
 ```
 
-But how does the view know to update when changes to the store are made? It doesn't. That's why we have to subscribe functions to the store. Any function that is subscribed to the store will get run any time the store is updated. Nifty!
+But how does the view know to update (render) when changes to the store are made? It doesn't. Because of that, we have to `subscribe` functions to the store. Any function that is subscribed to the store will get run any time the store is updated. Nifty!
 
 ```js
 // re-render every time the store is updated
@@ -220,9 +220,9 @@ dislikeButton.addEventListener('click', () => {
 
 </details>
 
-##Integrating React
+## Integrating React
 
-Let's refactor much of our JavaScript by introducing a React component called `LikeCounter`. First get of any code that's concerned with updating our view as we'll use React to take care of it.
+Let's refactor our JavaScript by introducing a React component called `LikeCounter`. First get rid of any code that's concerned with updating our view as we'll use React to take care of it.
 
 Now let's import `react` and `react-dom` into our project.
 
@@ -251,7 +251,7 @@ const LikeCounter = React.createClass({
 
 This component will get passed the `likeCount` as a prop. Additionally it has a function `like` that when triggered dispatches a `LIKE` action to our reducer.
 
-Now our `renderView` function can get updated to re-render our react component and pass in our store's state into it as a prop, `likeCount`.
+Now our `renderView` function can get updated to re-render our react component and pass our store's state into it as a prop, `likeCount`.
 
 ```js
 const renderView = () => {
@@ -279,7 +279,7 @@ renderView();
 ```
 
 
-##Challenge: Dislike it again!
+## Challenge: Dislike it again!
 
 <details>
 <summary>Make a `dislike` method for your `LikeCounter` component that dispatches a `'DISLIKE'` action when the dislike button is clicked.</summary>
@@ -342,259 +342,7 @@ renderView();
 
 </details>
 
-##Adding To Eatly
-
-Let's add another component to our application that's just a list of foods we want to eat, aka to Eatly!
-
-We'll need to create a new reducer for our application to keep track of our foods. This reducer will take one action by default, `ADD_FOOD`. When we add a food, it will return all the original foods plus the new food we intend to add.
-
-```js
-const foods = (state = [], action) => {
-  switch (action.type) {
-    case 'ADD_FOOD':
-      // return an entirely new list of foods using the spread operator
-      return [
-        ...state,
-        {
-          name: action.name
-        }
-      ]
-    default:
-      return state
-  }
-}
-```
-
-If we have two reducers in our application we need to use the `combineReducers` member of our Redux module, so let's import it.
-
-```js
-import { createStore, combineReducers } from 'redux'
-```
-
-We can combine our reducers into a single application reducer and then pass that into our store instead.
-
-```js
-// pack separate reducers into a single one for the application
-const app = combineReducers({foods,likes})
-// use the single reducer to generate our single application-wide store
-const store = createStore(app)
-```
-
-Now we need to create `FoodList` component in React that allows the user to input a new food and see a list of foods rendered. For now we'll only worry about allowing them to input the food's `name`. We can collect user input as follows.
-
-```js
-// Food list React component
-const FoodList = React.createClass({
-  // set initial state
-  getInitialState() {
-    return {
-      name: null
-    }
-  },
-  // update state when the input is changed
-  handleNameChange(e) {
-    this.setState({name: e.target.value})
-  },
-  // form submit function
-  addFood(e) {
-    e.preventDefault()
-    store.dispatch({
-      type: 'ADD_FOOD',
-      name: this.state.name
-    })
-    // clear form
-    this.setState({name: null})
-  },
-  // initial render function
-  render() {
-    return(
-      <div>
-        <form onSubmit={this.addFood}>
-          <input placeholder="Name" value={this.state.name} onChange={this.handleNameChange} autoFocus />
-          <button>Add Food</button>
-        </form>
-        {/* list of the foods */}
-        <ul>
-          {store.getState().foods.map((food, index) =>
-            <li key={index}>
-              {food.name}
-            </li>
-          )}
-        </ul>
-      </div>
-    )
-  }
-})
-```
-
-Now to deal with rendering two components. We can create an `App` component that is the parent of all our other components, `FoodList` and `LikeCounter`, which we render instead.
-
-```js
-const App = React.createClass({
-  render() {
-    return(
-      <div>
-        <FoodList/>
-        <LikeCounter/>
-      </div>
-    )
-  }
-})
-```
-
-And update our `renderView` function and html page accordingly.
-
-```js
-const renderView = () => {
-  ReactDOM.render(
-    <App/>,
-    document.getElementById("app")
-  )
-}
-```
-
-```html
-<body>
-  <div id="app"></div>
-</body>
-```
-
-<details>
-<summary>Now take the time to refactor the `components` and `reducers` into separate directories/files as necessary. Inside me is what our application should look like at this point. </summary>
-
-```js
-"use strict"
-
-import { createStore, combineReducers } from 'redux'
-import React from 'react'
-import ReactDOM from 'react-dom'
-
-const foods = (state = [], action) => {
-  switch (action.type) {
-    case 'ADD_FOOD':
-      // return an entirely new list of foods using spread operator
-      return [
-        ...state,
-        {
-          name: action.name
-        }
-      ]
-    default:
-      return state
-  }
-}
-
-const likes = (state = 0, action) => {
-  switch(action.type) {
-    case 'LIKE':
-      return state + 1
-    case 'DISLIKE':
-      return state - 1
-    default:
-      return state
-  }
-}
-
-// pack separate reducers into a single one for the application
-const app = combineReducers({foods,likes})
-
-// use the single reducer to generate our single application-wide store
-const store = createStore(app)
-
-const LikeCounter = React.createClass({
-  like() {
-    store.dispatch({type: 'LIKE'})
-  },
-  dislike() {
-    store.dispatch({type: 'DISLIKE'})
-  },
-  render() {
-    return (
-      <div>
-        <h3>store.getState().likes</h3>
-        <button onClick={this.like}>Like</button>
-        <button onClick={this.dislike}>Dislike</button>
-      </div>
-    )
-  }
-})
-
-// Food list React component
-const FoodList = React.createClass({
-  // set initial state
-  getInitialState() {
-    return {
-      name: null
-    }
-  },
-  // update state when the input is changed
-  handleNameChange(e) {
-    this.setState({name: e.target.value})
-  },
-  // form submit function
-  addFood(e) {
-    e.preventDefault()
-    store.dispatch({
-      type: 'ADD_FOOD',
-      name: this.state.name
-    })
-    // clear form
-    this.setState({name: null})
-  },
-  // initial render function
-  render() {
-    return(
-      <div>
-        <form onSubmit={this.addFood}>
-          <input placeholder="Name" value={this.state.name} onChange={this.handleNameChange} autoFocus />
-          <button>Add Food</button>
-        </form>
-        {/* list of the foods */}
-        <ul>
-          {store.getState().foods.map((food, index) =>
-            <li key={index}>
-              {food.name}
-            </li>
-          )}
-        </ul>
-      </div>
-    )
-  }
-})
-
-const App = React.createClass({
-  render() {
-    return(
-      <div>
-        <FoodList/>
-        <LikeCounter/>
-      </div>
-    )
-  }
-})
-
-// Render the App component to the page
-const renderView = () => {
-  ReactDOM.render(
-    <App/>,
-    document.getElementById("app")
-  )
-}
-
-store.subscribe(renderView);
-
-renderView()
-```
-
-</details>
-
-An example solution can be found inside `solution-code`.
-
-##Bonus: Yumminess
-
-Add a yumminess (or any other) input to your `FoodList` component; update and render the state accordingly!
-
-##Helpful Redux Middleware & Complementary Modules
+## Helpful Redux Middleware & Complementary Modules
 
 >Note: Redux has middleware for it, to extend its behavior.
 
@@ -604,7 +352,7 @@ Add a yumminess (or any other) input to your `FoodList` component; update and re
 * Ensure your state is never mutated with [immutable](https://facebook.github.io/immutable-js/)
 * Going back in time in Redux with [UndoHistory](http://redux.js.org/docs/recipes/ImplementingUndoHistory.html)
 
-##More Videos & Blog Posts
+## More Videos & Blog Posts
 
 * Nice [video tutorial](https://egghead.io/series/getting-started-with-redux) by the creator
 * Another [getting started](http://www.jchapron.com/2015/08/14/getting-started-with-redux/) tutorial
@@ -613,7 +361,7 @@ Add a yumminess (or any other) input to your `FoodList` component; update and re
 * [Full-stack Redux](http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html)
 * [3REE](http://blog.workshape.io/the-3ree-stack-react-redux-rethinkdb-express-js/) Stack (React, Redux, RethinkDB, Express)
 
-##Final Questions
+## Final Questions
 
 <details>
 <summary>What are Redux's: Three Priciples?</summary>
@@ -635,6 +383,3 @@ A reducer takes in an **original state** and an **action type** to decide what t
 React **displays the state** (view), while Redux **manages the state** (model) of the application.
 
 </details>
-
-
-

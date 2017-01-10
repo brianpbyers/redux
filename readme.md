@@ -292,8 +292,7 @@ renderView();
 
 ## Challenge: Dislike it again!
 
-<details>
-<summary>Make a `dislike` method for your `LikeCounter` component that dispatches a `'DISLIKE'` action when the dislike button is clicked.
+Make a `dislike` method for your `LikeCounter` component that dispatches a `'DISLIKE'` action when the dislike button is clicked.
 
 First, add the `Dislike` button.  Then, have a look at where the `{{this.like}}` function is.  Put the `dislike()` function in the same place.
 

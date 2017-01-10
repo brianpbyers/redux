@@ -3,6 +3,10 @@ Creator: Ilias Tsangaris
 Market: SF
 -->
 
+<!--1:35 5 minutes -->
+
+<!--Hook: Alright, now we know the basics of React.  We had a brief introduction of state with React, but only scratched the surface.  As you can imagine, once our apps grow considerably large with multiple components, it becomes hard to manage state.  That's where Redux comes in. -->
+
 ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png)
 
 # Redux
@@ -30,6 +34,8 @@ Keeping track of an application's state is hard. Redux's patterns help our data 
 * **Write** JavaScript
 * **Build** a simple application with React
 
+<!--1:40 5 minutes -->
+
 ## Philosophy
 
 [Redux](https://github.com/reactjs/redux)'s main purpose is to **manage the state of an application**. Its patterns are expressly inspired by [Flux](https://github.com/facebook/flux), Facebook's recommended way to manage state among React components and [Elm](https://github.com/elm-lang), a functional programming language.
@@ -45,6 +51,8 @@ Redux has three very important design choices:
 ### Redux Architecture
 
 ![redux-architecture](https://camo.githubusercontent.com/83fef7601c50c8b025953579e5c5be3aa47ee51d/687474703a2f2f692e696d6775722e636f6d2f30756e68744e512e6a7067)
+
+<!--1:45 20 minutes -->
 
 ## Redux Like Button
 
@@ -177,15 +185,21 @@ likeButton.addEventListener('click', () => {
 
 </details>
 
+<!--2:05 10 minutes -->
 
-##Challenge: Dislike!
+## Challenge: Dislike!
 
-<details>
-<summary>On your own create a `dislike` button that trigger a `DISLIKE` action and decrements the state by 1 each time it is clicked.</summary>
+On your own create a `dislike` button that trigger a `DISLIKE` action and decrements the state by 1 each time it is clicked.  
 
-Update the reducer to include a new "DISLIKE" action type that decrements the state by 1
+In other words, update the reducer to include a new "DISLIKE" action type that decrements the state by 1.
 
-```js
+Then, make a dislike button.
+
+Then, target the button.
+
+Finally, add an event listener to your dislike button that triggers a DISLIKE action.
+
+<!--Example solution
 const likes = (state = 0, action) => {
   switch(action.type) {
     case 'LIKE':
@@ -196,21 +210,20 @@ const likes = (state = 0, action) => {
       return state
   }
 }
-```
 
-Make a dislike button
+--dislike button:
 
 ```html
 <button id="dislike-button">Dislike</button>
 ```
 
-Target the button
+--Target the button:
 
 ```js
 const dislikeButton = document.getElementById("dislike-button")
 ```
 
-Add an event to your dislike button that triggers a DISLIKE action.
+--Add an event to your dislike button that triggers a DISLIKE action.
 
 ```js
 dislikeButton.addEventListener('click', () => {
@@ -218,20 +231,15 @@ dislikeButton.addEventListener('click', () => {
 })
 ```
 
-</details>
+-->
+
+<!--2:15 15 minutes -->
 
 ## Integrating React
 
-Let's refactor our JavaScript by introducing a React component called `LikeCounter`. First get rid of any code that's concerned with updating our view as we'll use React to take care of it.
+Let's refactor our JavaScript by introducing a React component called `LikeCounter`. First, comment out any code that's concerned with updating our view as we'll use React to take care of it.
 
-Now let's import `react` and `react-dom` into our project.
-
-```js
-import React from 'react'
-import ReactDOM from 'react-dom'
-```
-
-And create a `LikeCounter` component
+Let's create a `LikeCounter` component in `index.jsx`:
 
 ```js
 const LikeCounter = React.createClass({
@@ -268,6 +276,8 @@ Don't forget to make a place on your HTML page for the component to live.
 <div id="like-counter"></div>
 ```
 
+Then clear out all the older HTML elements (buttons and the total-likes heading).
+
 Also, just like before, ensure that `renderView` gets called once initially and is also called anytime the state is updated.
 
 ```js
@@ -278,21 +288,16 @@ store.subscribe(renderView)
 renderView();
 ```
 
+<!--2:30 10 minutes -->
 
 ## Challenge: Dislike it again!
 
 <details>
-<summary>Make a `dislike` method for your `LikeCounter` component that dispatches a `'DISLIKE'` action when the dislike button is clicked.</summary>
+<summary>Make a `dislike` method for your `LikeCounter` component that dispatches a `'DISLIKE'` action when the dislike button is clicked.
 
-```js
-"use strict"
+First, add the `Dislike` button.  Then, have a look at where the `{{this.like}}` function is.  Put the `dislike()` function in the same place.
 
-import { createStore } from 'redux'
-import React from 'react'
-import ReactDOM from 'react-dom'
-
-// like-button component
-
+<!--Example solution 
 const LikeCounter = React.createClass({
   like() {
     store.dispatch({type: 'LIKE'})
@@ -311,36 +316,9 @@ const LikeCounter = React.createClass({
   }
 })
 
-// reducer for the like button
-const likes = (state = 0, action) => {
-  switch(action.type) {
-    case 'LIKE':
-      return state + 1
-    case 'DISLIKE':
-      return state - 1
-    default:
-      return state
-  }
-}
+-->
 
-// create a store, where the state lives
-const store = createStore(likes);
-
-const renderView = () => {
-  ReactDOM.render(
-    <LikeCounter likeCount={store.getState()}/>,
-    document.getElementById("like-counter")
-  )
-}
-
-// render every time the store is updated
-store.subscribe(renderView)
-
-// called once for initialization
-renderView();
-```
-
-</details>
+<!--2:40 10 minutes -->
 
 ## Helpful Redux Middleware & Complementary Modules
 

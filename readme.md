@@ -156,8 +156,6 @@ const likes = (state = 0, action) => {
   switch(action.type) {
     case 'LIKE':
       return state + 1
-    case 'DISLIKE':
-      return state - 1
     default:
       return state
   }
@@ -237,7 +235,41 @@ dislikeButton.addEventListener('click', () => {
 
 ## Integrating React
 
-Let's refactor our JavaScript by introducing a React component called `LikeCounter`. First, comment out any code that's concerned with updating our view as we'll use React to take care of it.
+Let's refactor our JavaScript by introducing a React component called `LikeCounter`. We'll remove any code that's concerned with updating our view, and import React to take care of it:
+
+```js
+"use strict"
+import React from 'React'
+import ReactDOM from 'React'
+import {createStore} from 'redux'
+const totalLikes = document.getElementById("total-likes")
+
+// reducer for the like button
+const likes = (state = 0, action) => {
+  switch(action.type) {
+    case 'LIKE':
+      return state + 1
+    case 'DISLIKE':
+      return state - 1
+    default:
+      return state
+  }
+}
+
+// create a store, where the state lives
+const store = createStore(likes);
+
+// update the DOM with the new state
+const renderView = () => {
+  totalLikes.innerText = store.getState();
+}
+
+// re-render every time the store is updated
+store.subscribe(renderView)
+
+// called once for initialization
+renderView()
+```
 
 Let's create a `LikeCounter` component in `index.jsx`:
 

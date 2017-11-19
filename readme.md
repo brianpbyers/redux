@@ -44,7 +44,7 @@ Keeping track of an application's state is hard. Redux's patterns help our data 
 
 Redux has three very important design choices:
 
-* **Single source of truth**: The entire state of your application is stored as an object within your application's store. More specifically this object is a state tree, an object that contains other objects, representing the application's state.
+* **Single source of truth**: The entire state of your application is stored as an object within your application's `store`. More specifically, this object is called your `state tree` - an object that contains other objects, representing every piece of your application's state. I.e., a `store` holds the whole `state tree` of your application.
 * **State is read-only**: The *only* way to mutate your application's state is to emit an action and create a *new* state object. All actions are dispatched to a centralized location, which helps make your state easier to keep track of.
 * **Changes are made with pure functions**: Changes to your state are determined by reducers, which are pure functions that take in the previous state and an action. Using this information, it determines the updated state. Your application may start with a single reducer, but as the application grows, different reducers can manage different parts of the application's state.
 

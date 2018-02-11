@@ -2,17 +2,17 @@ import React from 'react'
 import store from '../reducers/rootReducer'
 
 // Food list React component
-const FoodList = React.createClass({
+class FoodList extends React.Component{
   // set initial state
   getInitialState() {
     return {
       name: null
     }
-  },
+  }
   // update state when the input is changed
   handleNameChange(e) {
     this.setState({name: e.target.value})
-  },
+  }
   // form submit function
   addFood(e) {
     e.preventDefault()
@@ -22,7 +22,7 @@ const FoodList = React.createClass({
     })
     // clear form
     this.setState({name: null})
-  },
+  }
   // initial render function
   render() {
     return(
@@ -42,6 +42,6 @@ const FoodList = React.createClass({
       </div>
     )
   }
-})
+}
 
 export default FoodList

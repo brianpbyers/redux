@@ -2,7 +2,7 @@ import React from 'react'
 import FoodList from './FoodList'
 import LikeCounter from './LikeCounter'
 
-const App = React.createClass({
+class App extends React.Component{
   render() {
     return(
       <div>
@@ -11,6 +11,6 @@ const App = React.createClass({
       </div>
     )
   }
-})
+}
 
 export default App

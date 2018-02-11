@@ -246,7 +246,7 @@ class LikeCounter extends React.Component{
   like() {
     store.dispatch({type: 'LIKE'})
   }
-  
+
   render() {
     return (
       <div>
@@ -298,7 +298,7 @@ Make a `dislike` method for your `LikeCounter` component that dispatches a `'DIS
 First, add the `Dislike` button.  Then, have a look at where the `{{this.like}}` function is.  Put the `dislike()` function in the same place.
 
 <!--Example solution 
-const LikeCounter = React.createClass({
+class LikeCounter extends React.Component{
   like() {
     store.dispatch({type: 'LIKE'})
   },
@@ -314,7 +314,7 @@ const LikeCounter = React.createClass({
       </div>
     )
   }
-})
+}
 
 -->
 

@@ -242,10 +242,11 @@ Let's refactor our JavaScript by introducing a React component called `LikeCount
 Let's create a `LikeCounter` component in `index.jsx`:
 
 ```js
-const LikeCounter = React.createClass({
+class LikeCounter extends React.Component{
   like() {
     store.dispatch({type: 'LIKE'})
-  },
+  }
+  
   render() {
     return (
       <div>
@@ -254,7 +255,7 @@ const LikeCounter = React.createClass({
       </div>
     )
   }
-})
+}
 ```
 
 This component will get passed the `likeCount` as a prop. Additionally it has a function `like` that when triggered dispatches a `LIKE` action to our reducer.

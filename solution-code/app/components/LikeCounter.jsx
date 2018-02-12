@@ -1,13 +1,13 @@
 import React from 'react'
 import store from '../reducers/rootReducer'
 
-const LikeCounter = React.createClass({
+class LikeCounter extends React.Component{
   like() {
     store.dispatch({type: 'LIKE'})
-  },
+  }
   dislike() {
     store.dispatch({type: 'DISLIKE'})
-  },
+  }
   render() {
     return (
       <div>
@@ -17,6 +17,6 @@ const LikeCounter = React.createClass({
       </div>
     )
   }
-})
+}
 
 export default LikeCounter
